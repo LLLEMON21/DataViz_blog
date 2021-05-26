@@ -1,0 +1,25 @@
+---
+title: "Welcome to Lemon's Blog"
+description: |
+  Welcome to My new blog, DataViz Blog. I hope you enjoy 
+  reading what I have to say!
+author:
+  - name: Lemon 
+    url: https://r4dsa.netlify.app/
+    affiliation: School of Computing and Information Systems, Singapore Management University
+    affiliation_url: https://scis.smu.edu.sg/
+date: 05-26-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+
+
+```
+
+
+
