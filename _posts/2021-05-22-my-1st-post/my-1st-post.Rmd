@@ -1,7 +1,7 @@
 ---
 title: "DataViz Makeover 01"
 description: |
-  Design truthful and enlightening data visualisation for Merchandise Trade by Region/Market.
+  Design truthful and enlightening data visualisation of Merchandise Trade for Top 6 countries by year 2019 and 2020.
 author:
   - name: Li Yumeng
     url: https://nicetry.netlify.app/
