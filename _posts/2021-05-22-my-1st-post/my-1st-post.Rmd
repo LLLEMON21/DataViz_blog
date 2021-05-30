@@ -46,6 +46,7 @@ Before making over the selected visualisation, it is important to have a clear u
 ![](image/table3.JPG)
 
 # 3)	 Proposed Design
+
 ## 3.1 Sketch
 ![](image/Sketch_update.png)
 *Figure 2: Sketch of proposed design*
@@ -56,79 +57,93 @@ First of all, bar chart shows the absolute numbers of trading volumes in 2019 an
 
 # 4) Data visualisation steps
 ## 4.1 Data preparation
-(1)	Remove unnecessary rows and columns for sheet T1
+**1. Remove unnecessary rows and columns for sheet T1**
 
 Delete  rows 1-5 and 127-140 and filter targeted rows, which are six targeted countries; Keep columns which are targeted time period, 2019 and 2020.
 
 ![](image/4.1.1.jpg)
 *Figure 3: Remove unnecessary rows and columns*
 
-(2) Do the same steps for sheet T2
-(3) Combine sheets T1 and T2 
+**2. Do the same steps for sheet T2**
+**3. Combine sheets T1 and T2** 
+
 Combine two sheets together, add one more column “Import/Export” to differentiate and rename the country names for concise purpose.
 ![](image/4.1.3.jpg)
 *Figure 4: Combine two sheets*
 
-(4) Pivot data
+**4. Pivot data**
+
 Import file into Tableau, select all the years, right click and select “Pivot”.
 ![](image/4.1.4.jpg)
 *Figure 5: Pivot*
 
-(5)	Rename headers and change data type for columns
+**5. Rename headers and change data type for columns**
+
 Rename ‘Variables’ to ‘Country’ and change data type to geographic role - country. Rename ‘Pivot Field Names’ to ‘Date’ and change data type to date. Rename ‘Pivot Field Values’ to ‘Trade Value’.
 
 ![](image/4.1.5.png)
 *Figure 6: Modify headers and data type*
 
 ## 4.2 Data visualisation
-1. Create line chart
-1.1 Drag [Country] and [Trade Volume] to Columns and Rows respectively.
+**1. Create line chart**
+
+1.1 Drag **Country** and **Trade Volume** to Columns and Rows respectively.
 ![](image/(1).png){width=70%}
 
 *Figure 7: Create line chart*
 
 1.2 Sort by Trade Volume and Update view from ‘Standard’ to ‘Entire View’.
+
 1.3 Add reference line for Trade Volume
+
 Apply average trade volume for six countries and custom label for the reference line, formatting the line at the same time.
-![](image/(3).png){width=70%}
+
+![](image/(3).png){width=60%}
 *Figure 8: Add reference line*
 
 1.4 Format reference line
+
 Change the font color to red and use currency format for numbers.
 ![](image/(4).png){width=50%}
 *Figure 9: Format for reference line*
 
-1.5 Drag <Trade Volume> to Label, and format labels with bigger size and bold font, also in custom currency format without decimals.
+1.5 Drag **Trade Volume** to Label, and format labels with bigger size and bold font, also in custom currency format without decimals.
 ![](image/(5).png){width=50%}
 *Figure 10: Add label*
 
 1.6 Hide field labels ‘Country’ for columns
+
 1.7 Drag <Date> to color and choose color blue for year 2019 and color orange for year 2020
+
 1.8 Rename the chart title as ‘Trade Volumn of Top 6 Countries by Year 2019 & 2020’
 
-2. Create line chart
+**2. Create line chart**
 
 2.1 Analysis - Create calculated field for ‘Import’
 ![](image/Analysis.png){width=50%}
 *Figure 11: Create calculated field*
 
 2.2 Same step for creating field ‘Export’
-2.3 Drag [Country] and [Import], [Export] to Rows and Columns, respectively.
+
+2.3 Drag **Country** and **Import**, **Export** to Rows and Columns, respectively.
 
 ![](image/same_step.png){width=50%}
 *Figure 12: Choose variables*
 
 2.4 Edit Axis for <Import>, reversed the scale
+
 ![](image/axis.png){width=50%}
 *Figure 13: Edit axis*
 
 
 2.5 Sort for Import in descending order
+
 2.6 Convert to percentage : 
 * Right click [SUM(Import)] > Quick Table Calculation > Percent of Total.
 * Right click [SUM(Export)] > Quick Table Calculation > Percent of Total.
 
 2.7 Drag **Date** to color for SUM(Import) and SUM(Export) respectively, and choose color blue for year 2019 and color orange for year 2020
+
 2.8	Drag **Import** to label, bigger the font size, change to white color and bold as well; format the numbers to percentage without decimals.
 
 
@@ -137,15 +152,17 @@ Change the font color to red and use currency format for numbers.
 *Figure 14: Change label format*
 
 2.9 Update view from ‘Standard’ to ‘Fit Width’.
+
 2.10 Rename the chart title as  ‘Proportion of Trade Volume by Year 2019 & 2020’
 
-3. Create dashboard
+**3. Create dashboard**
 
 3.1 Add sheets
 Add sheet “Trade Volume” on the top and sheet “Trade Proportion” to the bottom. Retain one year band legend, place it at the right corner.
 
 3.2 Add title
 Click the checkbox “Show dashboard title” and add title : “The Trade Volume and Proportion of Import/Export by Year 2019 and 2020” with font size 20 and put in center.
+
 3.3 Add source
 Using Objects > Text > drag to bottom left and add :
 “Source: Department of Statistics, Singapore (https://www.singstat.gov.sg/))
