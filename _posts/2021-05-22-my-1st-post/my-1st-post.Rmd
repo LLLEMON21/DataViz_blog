@@ -87,7 +87,7 @@ Rename ‘Variables’ to ‘Country’ and change data type to geographic role 
 ### (2) Sort by Trade Volume and Update view from ‘Standard’ to ‘Entire View’.
 ### (3) Add reference line for Trade Volume
 Apply average trade volume for six countries and custom label for the reference line, formatting the line at the same time.
-![](image/(3).png){width=60%}
+![](image/(3).png){width=70%}
 *Figure 8: Add reference line*
 
 ### (4)	Format reference line
