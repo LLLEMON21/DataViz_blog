@@ -9,6 +9,8 @@ date: 05-29-2021
 output:
   distill::distill_article:
     self_contained: false
+    toc: true
+    toc_depth: 3
 ---
 
 
@@ -16,6 +18,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+    
 # 1)	The original visualisation
 ![](image/Picture1.png)
 *Figure 1: Chart of Merchandise Trade by Region/Market, 2019 – 2020*
