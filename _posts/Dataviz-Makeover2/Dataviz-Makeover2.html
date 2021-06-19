@@ -86,635 +86,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Lemon's Blog: DataViz Blog</title>
+  <title>DataViz Makeover 01</title>
+
+  <meta property="description" itemprop="description" content="Design truthful and enlightening data visualisation of Merchandise Trade for Top 6 countries by year 2019 and 2020."/>
 
 
-
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2021-05-29"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-05-29"/>
+  <meta name="article:author" content="Li Yumeng"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Lemon&#39;s Blog: DataViz Blog"/>
+  <meta property="og:title" content="DataViz Makeover 01"/>
   <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Design truthful and enlightening data visualisation of Merchandise Trade for Top 6 countries by year 2019 and 2020."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Lemon&#39;s Blog"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Lemon&#39;s Blog: DataViz Blog"/>
+  <meta property="twitter:title" content="DataViz Makeover 01"/>
+  <meta property="twitter:description" content="Design truthful and enlightening data visualisation of Merchandise Trade for Top 6 countries by year 2019 and 2020."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","site","listing"]}},"value":[{"type":"character","attributes":{},"value":["DataViz Blog"]},{"type":"character","attributes":{},"value":["distill::distill_website"]},{"type":"character","attributes":{},"value":["posts"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["DataViz Makeover 01"]},{"type":"character","attributes":{},"value":["Design truthful and enlightening data visualisation of Merchandise Trade for Top 6 countries by year 2019 and 2020.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Li Yumeng"]},{"type":"character","attributes":{},"value":["https://nicetry.netlify.app/"]}]}]},{"type":"character","attributes":{},"value":["05-29-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["image/(1).png","image/(3).png","image/(4).png","image/(5).png","image/4.1.1.jpg","image/4.1.3.jpg","image/4.1.4.jpg","image/4.1.5.png","image/Analysis.png","image/Axis.png","image/Dashboard 1.jpg","image/image01.jpg","image/Import.png","image/Picture1.png","image/same_step.png","image/Sketch.JPG","image/Sketch_update.png","image/table1.JPG","image/table2.JPG","image/table3.JPG","image/try.JPG","my-1st-post_files/anchor-4.2.2/anchor.min.js","my-1st-post_files/bowser-1.9.3/bowser.min.js","my-1st-post_files/distill-2.2.21/template.v2.js","my-1st-post_files/header-attrs-2.8/header-attrs.js","my-1st-post_files/jquery-1.11.3/jquery.min.js","my-1st-post_files/popper-2.6.0/popper.min.js","my-1st-post_files/tippy-6.2.7/tippy-bundle.umd.min.js","my-1st-post_files/tippy-6.2.7/tippy-light-border.css","my-1st-post_files/tippy-6.2.7/tippy.css","my-1st-post_files/tippy-6.2.7/tippy.umd.min.js","my-1st-post_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
   <!--radix_placeholder_navigation_in_header-->
-  <meta name="distill:offset" content=""/>
-
-  <script type="application/javascript">
-
-    window.headroom_prevent_pin = false;
-
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-
-      // initialize headroom for banner
-      var header = $('header').get(0);
-      var headerHeight = header.offsetHeight;
-      var headroom = new Headroom(header, {
-        tolerance: 5,
-        onPin : function() {
-          if (window.headroom_prevent_pin) {
-            window.headroom_prevent_pin = false;
-            headroom.unpin();
-          }
-        }
-      });
-      headroom.init();
-      if(window.location.hash)
-        headroom.unpin();
-      $(header).addClass('headroom--transition');
-
-      // offset scroll location for banner on hash change
-      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
-      window.addEventListener("hashchange", function(event) {
-        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
-      });
-
-      // responsive menu
-      $('.distill-site-header').each(function(i, val) {
-        var topnav = $(this);
-        var toggle = topnav.find('.nav-toggle');
-        toggle.on('click', function() {
-          topnav.toggleClass('responsive');
-        });
-      });
-
-      // nav dropdowns
-      $('.nav-dropbtn').click(function(e) {
-        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
-        $(this).parent().siblings('.nav-dropdown')
-           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $("body").click(function(e){
-        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $(".nav-dropdown").click(function(e){
-        e.stopPropagation();
-      });
-    });
-  </script>
-
-  <style type="text/css">
-
-  /* Theme (user-documented overrideables for nav appearance) */
-
-  .distill-site-nav {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: #0F2E3D;
-    font-size: 15px;
-    font-weight: 300;
-  }
-
-  .distill-site-nav a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .distill-site-nav a:hover {
-    color: white;
-  }
-
-  @media print {
-    .distill-site-nav {
-      display: none;
-    }
-  }
-
-  .distill-site-header {
-
-  }
-
-  .distill-site-footer {
-
-  }
-
-
-  /* Site Header */
-
-  .distill-site-header {
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
-  }
-
-  .distill-site-header .nav-left {
-    display: inline-block;
-    margin-left: 8px;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header .nav-left {
-      margin-left: 0;
-    }
-  }
-
-
-  .distill-site-header .nav-right {
-    float: right;
-    margin-right: 8px;
-  }
-
-  .distill-site-header a,
-  .distill-site-header .title {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 10px 14px 10px;
-  }
-
-  .distill-site-header .title {
-    font-size: 18px;
-    min-width: 150px;
-  }
-
-  .distill-site-header .logo {
-    padding: 0;
-  }
-
-  .distill-site-header .logo img {
-    display: none;
-    max-height: 20px;
-    width: auto;
-    margin-bottom: -4px;
-  }
-
-  .distill-site-header .nav-image img {
-    max-height: 18px;
-    width: auto;
-    display: inline-block;
-    margin-bottom: -3px;
-  }
-
-
-
-  @media screen and (min-width: 1000px) {
-    .distill-site-header .logo img {
-      display: inline-block;
-    }
-    .distill-site-header .nav-left {
-      margin-left: 20px;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 20px;
-    }
-    .distill-site-header .title {
-      padding-left: 12px;
-    }
-  }
-
-
-  .distill-site-header .nav-toggle {
-    display: none;
-  }
-
-  .nav-dropdown {
-    display: inline-block;
-    position: relative;
-  }
-
-  .nav-dropdown .nav-dropbtn {
-    border: none;
-    outline: none;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 16px 10px;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    margin: 0;
-    margin-top: 1px;
-    z-index: 2;
-  }
-
-  .nav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 200px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    margin-top: 2px;
-    white-space: nowrap;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-
-  .nav-dropdown-content hr {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-dropdown-active {
-    display: block;
-  }
-
-  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
-    color: black;
-    padding: 6px 24px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-
-  .nav-dropdown-content .nav-dropdown-header {
-    display: block;
-    padding: 5px 24px;
-    padding-bottom: 0;
-    text-transform: uppercase;
-    font-size: 14px;
-    color: #999999;
-    white-space: nowrap;
-  }
-
-  .nav-dropdown:hover .nav-dropbtn {
-    color: white;
-  }
-
-  .nav-dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .nav-right .nav-dropdown-content {
-    margin-left: -45%;
-    right: 0;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
-    .distill-site-header a.nav-toggle {
-      float: right;
-      display: block;
-    }
-    .distill-site-header .title {
-      margin-left: 0;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 0;
-    }
-    .distill-site-header {
-      overflow: hidden;
-    }
-    .nav-right .nav-dropdown-content {
-      margin-left: 0;
-    }
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header.responsive {position: relative; min-height: 500px; }
-    .distill-site-header.responsive a.nav-toggle {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .distill-site-header.responsive a,
-    .distill-site-header.responsive .nav-dropdown {
-      display: block;
-      text-align: left;
-    }
-    .distill-site-header.responsive .nav-left,
-    .distill-site-header.responsive .nav-right {
-      width: 100%;
-    }
-    .distill-site-header.responsive .nav-dropdown {float: none;}
-    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
-    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
-      display: block;
-      width: 100%;
-      text-align: left;
-    }
-  }
-
-  /* Site Footer */
-
-  .distill-site-footer {
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 3;
-    margin-top: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-  }
-
-  /* Headroom */
-
-  d-title {
-    padding-top: 6rem;
-  }
-
-  @media print {
-    d-title {
-      padding-top: 4rem;
-    }
-  }
-
-  .headroom {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .headroom--transition {
-    transition: all .4s ease-in-out;
-  }
-
-  .headroom--unpinned {
-    top: -100px;
-  }
-
-  .headroom--pinned {
-    top: 0;
-  }
-
-  /* adjust viewport for navbar height */
-  /* helps vertically center bootstrap (non-distill) content */
-  .min-vh-100 {
-    min-height: calc(100vh - 100px) !important;
-  }
-
-  </style>
-
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
-  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
-
-  <script type="application/javascript">
-
-  function getMeta(metaName) {
-    var metas = document.getElementsByTagName('meta');
-    for (let i = 0; i < metas.length; i++) {
-      if (metas[i].getAttribute('name') === metaName) {
-        return metas[i].getAttribute('content');
-      }
-    }
-    return '';
-  }
-
-  function offsetURL(url) {
-    var offset = getMeta('distill:offset');
-    return offset ? offset + '/' + url : url;
-  }
-
-  function createFuseIndex() {
-
-    // create fuse index
-    var options = {
-      keys: [
-        { name: 'title', weight: 20 },
-        { name: 'categories', weight: 15 },
-        { name: 'description', weight: 10 },
-        { name: 'contents', weight: 5 },
-      ],
-      ignoreLocation: true,
-      threshold: 0
-    };
-    var fuse = new window.Fuse([], options);
-
-    // fetch the main search.json
-    return fetch(offsetURL('search.json'))
-      .then(function(response) {
-        if (response.status == 200) {
-          return response.json().then(function(json) {
-            // index main articles
-            json.articles.forEach(function(article) {
-              fuse.add(article);
-            });
-            // download collections and index their articles
-            return Promise.all(json.collections.map(function(collection) {
-              return fetch(offsetURL(collection)).then(function(response) {
-                if (response.status === 200) {
-                  return response.json().then(function(articles) {
-                    articles.forEach(function(article) {
-                      fuse.add(article);
-                    });
-                  })
-                } else {
-                  return Promise.reject(
-                    new Error('Unexpected status from search index request: ' +
-                              response.status)
-                  );
-                }
-              });
-            })).then(function() {
-              return fuse;
-            });
-          });
-
-        } else {
-          return Promise.reject(
-            new Error('Unexpected status from search index request: ' +
-                        response.status)
-          );
-        }
-      });
-  }
-
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-
-    // get search element (bail if we don't have one)
-    var searchEl = window.document.getElementById('distill-search');
-    if (!searchEl)
-      return;
-
-    createFuseIndex()
-      .then(function(fuse) {
-
-        // make search box visible
-        searchEl.classList.remove('hidden');
-
-        // initialize autocomplete
-        var options = {
-          autoselect: true,
-          hint: false,
-          minLength: 2,
-        };
-        window.autocomplete(searchEl, options, [{
-          source: function(query, callback) {
-            const searchOptions = {
-              isCaseSensitive: false,
-              shouldSort: true,
-              minMatchCharLength: 2,
-              limit: 10,
-            };
-            var results = fuse.search(query, searchOptions);
-            callback(results
-              .map(function(result) { return result.item; })
-            );
-          },
-          templates: {
-            suggestion: function(suggestion) {
-              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
-                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
-                : '';
-              var html = `
-                <div class="search-item">
-                  <h3>${suggestion.title}</h3>
-                  <div class="search-item-description">
-                    ${suggestion.description || ''}
-                  </div>
-                  <div class="search-item-preview">
-                    ${img}
-                  </div>
-                </div>
-              `;
-              return html;
-            }
-          }
-        }]).on('autocomplete:selected', function(event, suggestion) {
-          window.location.href = offsetURL(suggestion.path);
-        });
-        // remove inline display style on autocompleter (we want to
-        // manage responsive display via css)
-        $('.algolia-autocomplete').css("display", "");
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-
-  });
-
-  </script>
-
-  <style type="text/css">
-
-  .nav-search {
-    font-size: x-small;
-  }
-
-  /* Algolioa Autocomplete */
-
-  .algolia-autocomplete {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: sub;
-    background-color: white;
-    color: black;
-    padding: 6px;
-    padding-top: 8px;
-    padding-bottom: 0;
-    border-radius: 6px;
-    border: 1px #0F2E3D solid;
-    width: 180px;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-nav .algolia-autocomplete {
-      display: none;
-      visibility: hidden;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete {
-      display: inline-block;
-      visibility: visible;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
-      margin-left: 0;
-      width: 400px;
-      max-height: 400px;
-    }
-  }
-
-  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-    width: 90%;
-    outline: none;
-    border: none;
-  }
-
-  .algolia-autocomplete .aa-hint {
-    color: #999;
-  }
-  .algolia-autocomplete .aa-dropdown-menu {
-    width: 550px;
-    max-height: 70vh;
-    overflow-x: visible;
-    overflow-y: scroll;
-    padding: 5px;
-    margin-top: 3px;
-    margin-left: -150px;
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #999;
-    border-top: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-    cursor: pointer;
-    padding: 5px 4px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
-    border-bottom: none;
-    margin-bottom: 2px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
-    overflow: hidden;
-    font-size: 0.8em;
-    line-height: 1.4em;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
-    font-size: 1rem;
-    margin-block-start: 0;
-    margin-block-end: 5px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
-    display: inline-block;
-    overflow: hidden;
-    height: 2.8em;
-    width: 80%;
-    margin-right: 4%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
-    display: inline-block;
-    width: 15%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
-    height: 3em;
-    width: auto;
-    display: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
-    display: initial;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-    background-color: #eee;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  </style>
-
-
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -2030,251 +1434,158 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
-  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
-  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
-  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
-  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
-  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
-  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
-  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="my-1st-post_files/header-attrs-2.8/header-attrs.js"></script>
+  <script src="my-1st-post_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="my-1st-post_files/popper-2.6.0/popper.min.js"></script>
+  <link href="my-1st-post_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="my-1st-post_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="my-1st-post_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="my-1st-post_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="my-1st-post_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="my-1st-post_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="my-1st-post_files/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
   <!--/radix_placeholder_site_in_header-->
 
 
 </head>
 
-<body class="layout-listing">
+<body>
 
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"DataViz Blog","authors":[]}
+{"title":"DataViz Makeover 01","description":"Design truthful and enlightening data visualisation of Merchandise Trade for Top 6 countries by year 2019 and 2020.","authors":[{"author":"Li Yumeng","authorURL":"https://nicetry.netlify.app/","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-05-29T00:00:00.000+08:00","citationText":"Yumeng, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
-<header class="header header--fixed" role="banner">
-<nav class="distill-site-nav distill-site-header">
-<div class="nav-left">
-<a href="index.html" class="title">Lemon's Blog</a>
-<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
-</div>
-<div class="nav-right">
-<a href="index.html">Home</a>
-<a href="index.html">DataViz Makeover</a>
-<a href="about.html">About</a>
-<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
-</div>
-</nav>
-</header>
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
-<!--radix_placeholder_article_listing-->
-
-
-<script type="application/javascript">
-
-function init_posts_list() {
-
-  function load_image(img) {
-    var src = $(img).attr('data-src');
-    if (src) {
-      $(img).attr('src', src);
-      $(img).load(function() {
-        img.removeAttribute('data-src');
-      });
-    }
-  }
-
-  function set_posts_visible(posts, visible) {
-    if (visible) {
-
-      // show bottom border by default
-      $(posts).removeClass('post-preview-last');
-
-      // apply limits if need be
-      var max_posts = 25;
-      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
-      if (apply_limits && posts.length > max_posts) {
-        posts = $(posts).slice(0, max_posts);
-      } else {
-        $('.posts-more a').addClass('hidden');
-      }
-
-      // apply last style
-      $(posts.slice(-1)[0]).addClass('post-preview-last');
-
-      $(posts).removeClass('hidden');
-      $(posts).find('img[data-src]').each(function(i, img) {
-        load_image(img);
-      });
-    } else {
-      $(posts).addClass('hidden');
-    }
-  }
-
-  function apply_hash_filter() {
-
-    // clear active state
-    $('.categories .active').removeClass('active');
-
-    // mark all posts invisible to start
-    set_posts_visible($('.posts-list').children('a'), false);
-
-    // if we have a hash filter
-    if (window.location.hash && window.location.hash.startsWith("#category:")) {
-
-      // mark posts that match the category visible
-      var page_category = window.location.hash.replace(/^#category:/, "");
-      var posts = $('.post-metadata').map(function(idx, script) {
-        var metadata = $.parseJSON($(script).html());
-        var post = null;
-        $.each(metadata.categories, function(idx, category) {
-          category = category.replace(/ /g,"_");
-          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
-            post = $(script).parent().get();
-            return false;
-          }
-        });
-        return post;
-      });
-      set_posts_visible(posts, true);
-
-      // mark the hash active
-      $('.categories li>a[href="' + window.location.hash + '"]').addClass('active');
-
-      // update the list_caption
-      var list_caption = $('.posts-list-caption');
-      var caption = (page_category || '').toLowerCase() === "articles"
-        ? list_caption.attr('data-caption')
-        : ('Category: ' + page_category.replace(/_/g," "));
-      list_caption.text(caption);
-
-    } else {
-
-      // no hash filter, make all posts visible (subject to max display)
-      set_posts_visible($('.posts-list').children(), true);
-
-      // reset list caption
-      var list_caption = $('.posts-list-caption');
-      list_caption.text(list_caption.attr('data-caption'));
-
-
-    }
-  }
-
-  // more articles
-  function apply_post_limits(apply) {
-    if (apply) {
-      $('.posts-container').addClass('posts-apply-limit');
-      $('.posts-more a').removeClass('hidden');
-    } else {
-      $('.posts-container').removeClass('posts-apply-limit');
-      $('.posts-more a').addClass('hidden');
-    }
-  }
-
-  // click handling for tags
-  $('.dt-tag').click(function(ev) {
-    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
-    return false;
-  })
-
-  // hash filter handling
-  apply_hash_filter();
-  $(window).on('hashchange',function() {
-    apply_post_limits(true);
-    apply_hash_filter();
-  });
-
-  // more articles link
-  $('.posts-more a').click(function(e) {
-    e.preventDefault();
-    apply_post_limits(false);
-    apply_hash_filter();
-    return false;
-  });
-
-}
-
-</script>
-
-
-
-<div class="posts-container posts-apply-limit l-page">
-<div class="posts-list">
-<h1 class="posts-list-caption" data-caption="DataViz Blog">DataViz Blog</h1>
-<a href="posts/2021-05-22-my-1st-post/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":[]}</script>
-<div class="metadata">
-<div class="publishedDate">May 29, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Li Yumeng</div>
-</div>
-</div>
-<div class="thumbnail">
-<img/>
-</div>
-<div class="description">
-<h2>DataViz Makeover 01</h2>
-<div class="dt-tags"></div>
-<p>Design truthful and enlightening data visualisation of Merchandise Trade for Top 6 countries by year 2019 and 2020.</p>
-</div>
-</a>
-<a href="posts/Dataviz-Makeover2/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":[]}</script>
-<div class="metadata">
-<div class="publishedDate">May 29, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Li Yumeng</div>
-</div>
-</div>
-<div class="thumbnail">
-<img/>
-</div>
-<div class="description">
-<h2>DataViz Makeover 01</h2>
-<div class="dt-tags"></div>
-<p>Design truthful and enlightening data visualisation of Merchandise Trade for Top 6 countries by year 2019 and 2020.</p>
-</div>
-</a>
-<a href="posts/welcome/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":[]}</script>
-<div class="metadata">
-<div class="publishedDate">May 26, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Lemon</div>
-</div>
-</div>
-<div class="thumbnail">
-<img/>
-</div>
-<div class="description">
-<h2>Welcome to Lemon's Blog</h2>
-<div class="dt-tags"></div>
-<p>Welcome to My new blog, DataViz Blog. I hope you enjoy 
-reading what I have to say!</p>
-</div>
-</a>
-</div>
-<div class="posts-more">
-<a href="#">More articles &raquo;</a>
-</div>
-</div>
-<!--/radix_placeholder_article_listing-->
 
 <div class="d-title">
-<h1>DataViz Blog</h1>
+<h1>DataViz Makeover 01</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-
+<p><p>Design truthful and enlightening data visualisation of Merchandise Trade for Top 6 countries by year 2019 and 2020.</p></p>
 </div>
 
+<div class="d-byline">
+  Li Yumeng <a href="https://nicetry.netlify.app/" class="uri">https://nicetry.netlify.app/</a> 
+  
+<br/>05-29-2021
+</div>
 
 <div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#the-original-visualisation">1) The original visualisation</a></li>
+<li><a href="#critiques-and-suggestions-for-current-visualisation">2) Critiques and suggestions for current visualisation</a>
+<ul>
+<li><a href="#clarity">2.1 Clarity</a></li>
+<li><a href="#aesthetics">2.2 Aesthetics</a></li>
+</ul></li>
+<li><a href="#proposed-design">3) Proposed Design</a>
+<ul>
+<li><a href="#sketch">3.1 Sketch</a></li>
+<li><a href="#desigh-ideas">3.2 Desigh ideas</a></li>
+</ul></li>
+<li><a href="#data-visualisation-steps">4) Data visualisation steps</a>
+<ul>
+<li><a href="#data-preparation">4.1 Data preparation</a></li>
+<li><a href="#data-visualisation">4.2 Data visualisation</a></li>
+</ul></li>
+<li><a href="#final-visualisation">5) Final visualisation</a>
+<ul>
+<li><a href="#snapshot-of-dashboard">5.1 Snapshot of dashboard</a></li>
+<li><a href="#main-observations">5.2 Main observations</a></li>
+</ul></li>
+</ul>
+</nav>
+</div>
+<h1 id="the-original-visualisation">1) The original visualisation</h1>
+<p><img src="image/Picture1.png" /> <em>Figure 1: Chart of Merchandise Trade by Region/Market, 2019 – 2020</em></p>
+<p><em>Notes:</em></p>
+<ul>
+<li>Dataset refers to Merchandise Imports &amp; Exports By Region/Market</li>
+<li><em>Source: <a href="https://www.singstat.gov.sg/find-data/search-by-theme/trade-and-investment/merchandise-trade">ENTERPRISE SINGAPORE</a></em>, Data last updated: 17/05/2021</li>
+</ul>
+<p>Before making over the selected visualisation, it is important to have a clear understanding of the context of the visualisation and its key takeaways which are dependent on:</p>
+<ul>
+<li>Who: Top six trading countries all around the world.</li>
+<li>What: Drawing the visualization graph and getting a better understanding of merchandise trade of these six countries over the past 2 years (2019 to 2020).</li>
+<li>How: Showing the import and export numbers as well as distribution and making comparison analysis of six countries.</li>
+</ul>
+<h1 id="critiques-and-suggestions-for-current-visualisation">2) Critiques and suggestions for current visualisation</h1>
+<h2 id="clarity">2.1 Clarity</h2>
+<p><img src="image/table1.JPG" /> <img src="image/table2.JPG" /></p>
+<h2 id="aesthetics">2.2 Aesthetics</h2>
+<p><img src="image/table3.JPG" /></p>
+<h1 id="proposed-design">3) Proposed Design</h1>
+<h2 id="sketch">3.1 Sketch</h2>
+<p><img src="image/Sketch_update.png" /> <em>Figure 2: Sketch of proposed design</em></p>
+<h2 id="desigh-ideas">3.2 Desigh ideas</h2>
+<p>First of all, bar chart shows the absolute numbers of trading volumes in 2019 and 2020 for the six countries which provide the whole picture of the trading performance; then use pyramid chart to give the detailed export and import performance of six countries over two years.</p>
+<h1 id="data-visualisation-steps">4) Data visualisation steps</h1>
+<h2 id="data-preparation">4.1 Data preparation</h2>
+<p><strong>1. Remove unnecessary rows and columns for sheet T1</strong></p>
+<p>Delete rows 1-5 and 127-140 and filter targeted rows, which are six targeted countries; Keep columns which are targeted time period, 2019 and 2020.</p>
+<p><img src="image/4.1.1.jpg" /> <em>Figure 3: Remove unnecessary rows and columns</em></p>
+<p><strong>2. Do the same steps for sheet T2</strong> <strong>3. Combine sheets T1 and T2</strong></p>
+<p>Combine two sheets together, add one more column “Import/Export” to differentiate and rename the country names for concise purpose. <img src="image/4.1.3.jpg" /> <em>Figure 4: Combine two sheets</em></p>
+<p><strong>4. Pivot data</strong></p>
+<p>Import file into Tableau, select all the years, right click and select “Pivot”. <img src="image/4.1.4.jpg" /> <em>Figure 5: Pivot</em></p>
+<p><strong>5. Rename headers and change data type for columns</strong></p>
+<p>Rename ‘Variables’ to ‘Country’ and change data type to geographic role - country. Rename ‘Pivot Field Names’ to ‘Date’ and change data type to date. Rename ‘Pivot Field Values’ to ‘Trade Value’.</p>
+<p><img src="image/4.1.5.png" /> <em>Figure 6: Modify headers and data type</em></p>
+<h2 id="data-visualisation">4.2 Data visualisation</h2>
+<p><strong>1. Create line chart</strong></p>
+<p>1.1 Drag <strong>Country</strong> and <strong>Trade Volume</strong> to Columns and Rows respectively. <img src="image/(1).png" style="width:70.0%" /></p>
+<p><em>Figure 7: Create line chart</em></p>
+<p>1.2 Sort by Trade Volume and Update view from ‘Standard’ to ‘Entire View’.</p>
+<p>1.3 Add reference line for Trade Volume</p>
+<p>Apply average trade volume for six countries and custom label for the reference line, formatting the line at the same time.</p>
+<p><img src="image/(3).png" style="width:60.0%" /> <em>Figure 8: Add reference line</em></p>
+<p>1.4 Format reference line</p>
+<p>Change the font color to red and use currency format for numbers. <img src="image/(4).png" style="width:50.0%" /> <em>Figure 9: Format for reference line</em></p>
+<p>1.5 Drag <strong>Trade Volume</strong> to Label, and format labels with bigger size and bold font, also in custom currency format without decimals. <img src="image/(5).png" style="width:50.0%" /> <em>Figure 10: Add label</em></p>
+<p>1.6 Hide field labels ‘Country’ for columns</p>
+<p>1.7 Drag <Date> to color and choose color blue for year 2019 and color orange for year 2020</p>
+<p>1.8 Rename the chart title as ‘Trade Volumn of Top 6 Countries by Year 2019 &amp; 2020’</p>
+<p><strong>2. Create line chart</strong></p>
+<p>2.1 Analysis - Create calculated field for ‘Import’ <img src="image/Analysis.png" style="width:50.0%" /> <em>Figure 11: Create calculated field</em></p>
+<p>2.2 Same step for creating field ‘Export’</p>
+<p>2.3 Drag <strong>Country</strong> and <strong>Import</strong>, <strong>Export</strong> to Rows and Columns, respectively.</p>
+<p><img src="image/same_step.png" style="width:50.0%" /> <em>Figure 12: Choose variables</em></p>
+<p>2.4 Edit Axis for <Import>, reversed the scale</p>
+<p><img src="image/Axis.png" style="width:50.0%" /> <em>Figure 13: Edit axis</em></p>
+<p>2.5 Sort for Import in descending order</p>
+<p>2.6 Convert to percentage : * Right click [SUM(Import)] &gt; Quick Table Calculation &gt; Percent of Total. * Right click [SUM(Export)] &gt; Quick Table Calculation &gt; Percent of Total.</p>
+<p>2.7 Drag <strong>Date</strong> to color for SUM(Import) and SUM(Export) respectively, and choose color blue for year 2019 and color orange for year 2020</p>
+<p>2.8 Drag <strong>Import</strong> to label, bigger the font size, change to white color and bold as well; format the numbers to percentage without decimals.</p>
+<p><img src="image/Import.png" style="width:70.0%" /></p>
+<p><em>Figure 14: Change label format</em></p>
+<p>2.9 Update view from ‘Standard’ to ‘Fit Width’.</p>
+<p>2.10 Rename the chart title as ‘Proportion of Trade Volume by Year 2019 &amp; 2020’</p>
+<p><strong>3. Create dashboard</strong></p>
+<p>3.1 Add sheets Add sheet “Trade Volume” on the top and sheet “Trade Proportion” to the bottom. Retain one year band legend, place it at the right corner.</p>
+<p>3.2 Add title Click the checkbox “Show dashboard title” and add title : “The Trade Volume and Proportion of Import/Export by Year 2019 and 2020” with font size 20 and put in center.</p>
+<p>3.3 Add source Using Objects &gt; Text &gt; drag to bottom left and add : “Source: Department of Statistics, Singapore (<a href="https://www.singstat.gov.sg/" class="uri">https://www.singstat.gov.sg/</a>))</p>
+<h1 id="final-visualisation">5) Final visualisation</h1>
+<h2 id="snapshot-of-dashboard">5.1 Snapshot of dashboard</h2>
+<p><img src="image/Dashboard%201.jpg" /> <em>Figure 15: Dashboard Full visualisation available at <a href="https://public.tableau.com/app/profile/lemon5793/viz/Top6tradingcountries/Dashboard1">Tableau Public</a></em></p>
+<h2 id="main-observations">5.2 Main observations</h2>
+<ol type="1">
+<li>In year 2019 and 2020. Mainland China has the highest trade volume among the top six trading countries, followed by Malaysia. The figure of the US also beyond average benchmark. Other countries, i.e. Taiwan, Hong Kong and Japan are below benchmark regarding to the total trading volume over two years.</li>
+<li>Looking into year 2019 and 2020 separately, Mainland China still remain the top 1 place for total trading volume. The rank remain stable for other countries as well.</li>
+<li>The rank of import volume for six countries is similar to the rank of total trading volume, except for Japan, which figure exceeded Hong Kong.</li>
+<li>There are some changes of rank for six countries with regard to export volume, Mainland China still remain the top 1, which followed by Hong Kong, Malaysia, United States, Japan and Taiwan.</li>
+<li>Mainland China had the undisputed strength towards overall trading performance, while Hong Kong had the smallest figure for import volume but surprisingly performed good at export performance.</li>
+<li>The proportion of export and import is similar for all 6 countries from 2019 to 2020. Mainland China, Japan and Hong Kong remain exactly the same. The percentage of export for Malaysia increased 2%; the US’s import dropped 3% and export dropped 2%; the import proportion of Taiwan increased 1%.</li>
+</ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
