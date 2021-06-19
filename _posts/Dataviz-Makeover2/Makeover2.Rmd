@@ -5,7 +5,7 @@ description: |
 author:
   - name: Li Yumeng
     url: https://nicetry.netlify.app/
-date: 05-29-2021
+date: 06-19-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
     
 # 1)	The original visualisation
-![](image/Picture1.png)
+![](image/1.jpg)
 *Figure 1: Chart of Merchandise Trade by Region/Market, 2019 – 2020*
 
 
