@@ -1,7 +1,7 @@
 ---
 title: "DataViz Makeover 02"
 description: |
-  Design truthful and enlightening data visualisation of Merchandise Trade for Top 6 countries by year 2019 and 2020.
+  Interactive Bubble Plot of Merchandise Trade Performance by Countries from 2011 to 2020.
 author:
   - name: Li Yumeng
     url: https://nicetry.netlify.app/
@@ -21,162 +21,183 @@ knitr::opts_chunk$set(echo = FALSE)
     
 # 1)	The original visualisation
 ![](image/1.jpg)
-*Figure 1: Chart of Merchandise Trade by Region/Market, 2019 – 2020*
-
-
-*Notes:*
-
-* Dataset refers to Merchandise Imports & Exports By Region/Market
-* _Source: [ENTERPRISE SINGAPORE](https://www.singstat.gov.sg/find-data/search-by-theme/trade-and-investment/merchandise-trade)_, Data last updated: 17/05/2021
-
-Before making over the selected visualisation, it is important to have a clear understanding of the context of the visualisation and its key takeaways which are dependent on:
- 
-* Who: Top six trading countries all around the world. 
-* What: Drawing the visualization graph and getting a better understanding of merchandise trade of these six countries over the past 2 years (2019 to 2020).
-* How: Showing the import and export numbers as well as distribution and making comparison analysis of six countries.
-
+*Figure 1: Chart of Merchandise Trade Performance With Major Trading Partners, 2020*
 
 # 2)	Critiques and suggestions for current visualisation
 ## 2.1 Clarity
 ![](image/table1.JPG)
-![](image/table2.JPG)
 
 ## 2.2 Aesthetics
 
-![](image/table3.JPG)
+![](image/table2.JPG)
 
 # 3)	 Proposed Design
 
 ## 3.1 Sketch
-![](image/Sketch_update.png)
+![](image/ketchup_update.jpg)
 *Figure 2: Sketch of proposed design*
 
-## 3.2 Desigh ideas
+## 3.2 Advantages of proposed design
 
-First of all, bar chart shows the absolute numbers of trading volumes in 2019 and 2020 for the six countries which provide the whole picture of the trading performance; then use pyramid chart to give the detailed export and import performance of six countries over two years. 
+i)	Clear title – Chart titles tell the big picture story, and make it interactive to show the change over years.
+ii)	Add reference line for Top 20% countries, which 80% for both percentile of Imports and Exports
+iii)	Make interactive Date selecting pane for each country to show year to year change clearly.
+
 
 # 4) Data visualisation steps
 ## 4.1 Data preparation
 **1. Remove unnecessary rows and columns for sheet T1**
 
-Delete  rows 1-5 and 127-140 and filter targeted rows, which are six targeted countries; Keep columns which are targeted time period, 2019 and 2020.
+Delete  rows 1-5 and 127-140 which are explanation information about data, also remove rows for total merchandise imports and 6 continents cause the comparison is between countries; Also only keep columns which are targeted time period, from January 2011 to December 2020.
 
-![](image/4.1.1.jpg)
+![](image/2.jpg)
 *Figure 3: Remove unnecessary rows and columns*
 
 **2. Do the same steps for sheet T2**
+
 **3. Combine sheets T1 and T2** 
 
 Combine two sheets together, add one more column “Import/Export” to differentiate and rename the country names for concise purpose.
-![](image/4.1.3.jpg)
+![](image/3.jpg)
 *Figure 4: Combine two sheets*
 
-**4. Pivot data**
+**4. Add one more column named “Trade Volume by Country”**
 
-Import file into Tableau, select all the years, right click and select “Pivot”.
-![](image/4.1.4.jpg)
-*Figure 5: Pivot*
+Add up export and import value for each country.
+![](image/4.jpg){width=50%}
+*Figure 5: Add one more column*
 
-**5. Rename headers and change data type for columns**
+**5. Pivot data**
+Import file into Tableau, select all the years, right click and select “Pivot”
+![](image/5.jpg)
+*Figure 6: Pivot data column*
 
-Rename ‘Variables’ to ‘Country’ and change data type to geographic role - country. Rename ‘Pivot Field Names’ to ‘Date’ and change data type to date. Rename ‘Pivot Field Values’ to ‘Trade Value’.
+**6. Rename headers and change data type for columns**
 
-![](image/4.1.5.png)
-*Figure 6: Modify headers and data type*
+Rename ‘Variables’ to ‘Country’ and change data type to geographic role - country. Rename ‘Pivot Field Names’ to ‘Date’ and change data type to date. 
+
+![](image/6.jpg)
+*Figure 7: Modify headers and data type*
 
 ## 4.2 Data visualisation
-**1. Create line chart**
 
-1.1 Drag **Country** and **Trade Volume** to Columns and Rows respectively.
-![](image/(1).png){width=70%}
+**1. Create bubble chart**
 
-*Figure 7: Create line chart*
+1.1. Create calculated field for ‘Imports‘, same step for creating field ‘Exports’
+![](image/7.jpg){width=70%}
 
-1.2 Sort by Trade Volume and Update view from ‘Standard’ to ‘Entire View’.
+*Figure 8: Create calculated field*
 
-1.3 Add reference line for Trade Volume
+1.2. Drag [Imports], [Exports] to Columns and Rows, respectively. and shows them by Country.
 
-Apply average trade volume for six countries and custom label for the reference line, formatting the line at the same time.
+![](image/8.jpg){width=70%}
 
-![](image/(3).png){width=60%}
-*Figure 8: Add reference line*
+*Figure 9: Create Scatter Plot*
 
-1.4 Format reference line
+1.3. Handle with NA values
 
-Change the font color to red and use currency format for numbers.
-![](image/(4).png){width=50%}
-*Figure 9: Format for reference line*
+![](image/9.jpg){width=60%}
 
-1.5 Drag **Trade Volume** to Label, and format labels with bigger size and bold font, also in custom currency format without decimals.
-![](image/(5).png){width=50%}
-*Figure 10: Add label*
+*Figure 10: Modify NA values*
 
-1.6 Hide field labels ‘Country’ for columns
+1.4. Change both axis to percentile to make each data point clearer
+Right click [SUM(Imports)] > Quick Table Calculation > Percentile.
+Right click [SUM(Exports)] > Quick Table Calculation > Percentile.
 
-1.7 Drag <Date> to color and choose color blue for year 2019 and color orange for year 2020
+![](image/10.jpg){width=50%}
 
-1.8 Rename the chart title as ‘Trade Volumn of Top 6 Countries by Year 2019 & 2020’
+*Figure 11: Change both axises to percentile format*
+
+1.5. For both imports and exports, compute using country
+
+1.6. Differentiae size for each country according to their total trade volume. Marks by circle and change size, opacity and border color to make it easier to see.Hide field labels ‘Country’ for columns
+
+![](image/11.jpg){width=50%}
+
+*Figure 12: Format circle size according to trade volume*
+
+1.7. Color the bubble
+Drag trade volume by country to color pane to make the bubbles which represent larger merchandise volume have darker color.
+
+![](image/12.jpg){width=50%}
+
+*Figure 13: Color coding for bubble*
+
+1.8. Add reference line and format for both axis, constant value for 80%
+
+![](image/13.jpg){width=50%}
+
+*Figure 14: Add reference line*
+
+![](image/14.jpg){width=50%}
+
+*Figure 15: Format reference line*
+
+1.9. Edit title for the graph
+
+![](image/16.jpg){width=50%}
+
+*Figure 16: Add graph title*
+
+1.10. Add year to filter and customize the format
+
+![](image/15.jpg){width=50%}
+
+*Figure 17: Add Year filter*
+
+1.11. Make data labels clearly
+The percentile value is not very intuitive, create two calculated fields: “Ranking by Exports” and “Ranking by Imports”
+
+![](image/17.jpg){width=50%}
+
+*Figure 18: Created calculated field*
+
+
+1.12. Remove the percentile in tooltip and add ranking information
+
+![](image/18.jpg){width=50%}
+
+*Figure 19: Modify Tooltip*
 
 **2. Create line chart**
 
-2.1 Analysis - Create calculated field for ‘Import’
-![](image/Analysis.png){width=50%}
-*Figure 11: Create calculated field*
-
-2.2 Same step for creating field ‘Export’
-
-2.3 Drag **Country** and **Import**, **Export** to Rows and Columns, respectively.
-
-![](image/same_step.png){width=50%}
-*Figure 12: Choose variables*
-
-2.4 Edit Axis for <Import>, reversed the scale
-
-![](image/axis.png){width=50%}
-*Figure 13: Edit axis*
+2.1. Make line charts for Exports and Imports respectively
+![](image/19.jpg){width=50%}
 
 
-2.5 Sort for Import in descending order
+*Figure 20: Create line chart*
 
-2.6 Convert to percentage : 
-* Right click [SUM(Import)] > Quick Table Calculation > Percent of Total.
-* Right click [SUM(Export)] > Quick Table Calculation > Percent of Total.
+2.2. Synchronize axis
 
-2.7 Drag **Date** to color for SUM(Import) and SUM(Export) respectively, and choose color blue for year 2019 and color orange for year 2020
+2.2. Add chart title
 
-2.8	Drag **Import** to label, bigger the font size, change to white color and bold as well; format the numbers to percentage without decimals.
+![](image/20.jpg){width=50%}
 
+*Figure 21: Add chart title*
 
-![](image/import.png){width=70%}
+**3. Interactive Purpose**
 
-*Figure 14: Change label format*
+3.1. Create one more filter for top countries
+Create calculated volume named “Ranking by Trade Volume”
 
-2.9 Update view from ‘Standard’ to ‘Fit Width’.
+![](image/21.jpg){width=50%}
 
-2.10 Rename the chart title as  ‘Proportion of Trade Volume by Year 2019 & 2020’
+*Figure 22: Create calculated field*
 
-**3. Create dashboard**
+3.2. Insert the line chart into bubble chart 
+Modify the content and format of bubble chart by tooltip.
 
-3.1 Add sheets
-Add sheet “Trade Volume” on the top and sheet “Trade Proportion” to the bottom. Retain one year band legend, place it at the right corner.
+![](image/tooptip.JPG){width=50%}
 
-3.2 Add title
-Click the checkbox “Show dashboard title” and add title : “The Trade Volume and Proportion of Import/Export by Year 2019 and 2020” with font size 20 and put in center.
-
-3.3 Add source
-Using Objects > Text > drag to bottom left and add :
-“Source: Department of Statistics, Singapore (https://www.singstat.gov.sg/))
-
+*Figure 23: Modify the tooltip of bubble chart*
 
 # 5) Final visualisation
 ## 5.1 Snapshot of dashboard
-![](image/Dashboard 1.jpg)
-*Figure 15: Dashboard Full visualisation available at [Tableau Public](https://public.tableau.com/app/profile/lemon5793/viz/Top6tradingcountries/Dashboard1)*
+![](image/final.JPG)
+*Figure 24: Dashboard Full visualisation available at [Tableau Public](https://public.tableau.com/app/profile/lemon5793/viz/MerchandiseTradePerformance/InteractiveBubblePlot)*
 
 ## 5.2 Main observations
-1. In year 2019 and 2020. Mainland China has the highest trade volume among the top six trading countries, followed by Malaysia. The figure of the US also beyond average benchmark. Other countries, i.e. Taiwan, Hong Kong and Japan are below benchmark regarding to the total trading volume over two years.
-2. Looking into year 2019 and 2020 separately, Mainland China still remain the top  1 place for total trading volume. The rank remain stable for other countries as well.
-3. The rank of import volume for six countries is similar to the rank of total trading volume, except for Japan, which figure exceeded Hong Kong. 
-4. There are some changes of rank for six countries with regard to export volume, Mainland China still remain the top 1, which followed by Hong Kong, Malaysia, United States, Japan and Taiwan.
-5. Mainland China had the undisputed strength towards overall trading performance, while Hong Kong had the smallest figure for import volume but surprisingly performed good at export performance.
-6. The proportion of export and import is similar for all 6 countries from 2019 to 2020. Mainland China, Japan and Hong Kong remain exactly the same. The percentage of export for Malaysia increased 2%; the US’s import dropped 3% and export dropped 2%; the import proportion of Taiwan increased 1%.
+1. In year 2020, China's total merchandise volume, i.e. Exports volume plus Imports volume ranked in the first place, however it does not mantain in the first place during the observing time period.
+2. Regarding to total merchandise volume, the top 5 countries are Hong Kong, Mainland China, Indonesia, Malaysia, Taiwan and United States. However, Hong Kong’s Exports volume not always beyond Top20% compared with other countries, we can see Hong Kong is strong in Imports but weak in Exports performance. 
+3. Five more countries include for the list of Top 10 countries. Japan, Thailand, India and Korea. Indian’s Imports performance is not always beyond the Top20% benchmark.
+4. Choose filter pane for year, we can see each country’s Exports and Imports volume changing in an interactive way, which doesn’t change dramatically during the observing time period, 2011 to 2020.
