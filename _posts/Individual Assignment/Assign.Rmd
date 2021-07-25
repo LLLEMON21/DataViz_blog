@@ -1,7 +1,7 @@
 ---
 title: "Individual Assignment"
 description: |
-  take a try
+  find something interesting
 author:
   - name: Li Yumeng
     url: https://nicetry.netlify.app/
@@ -13,10 +13,43 @@ output:
     toc_depth: 3
 ---
 
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+	eval = TRUE,
+	echo = TRUE,
+	fig.retins = 3,
+	message = FALSE,
+	warning = FALSE
+)
 ```
+
+
+![](image/1.jpg)
+
+# VAST Challenge 2021 - Mini-Challenge 2
+
+Many of the Abila, Kronos-based employees of GAStech have company cars which are approved for both personal and business use. Those who do not have company cars have the ability to check out company trucks for business use, but these trucks cannot be used for personal business.
+
+Employees with company cars are happy to have these vehicles, because the company cars are generally much higher quality than the cars they would be able to afford otherwise. However, GAStech does not trust their employees. Without the employees? knowledge, GAStech has installed geospatial tracking software in the company vehicles. The vehicles are tracked periodically as long as they are moving.
+
+This vehicle tracking data has been made available to law enforcement to support their investigation. Unfortunately, data is not available for the day the GAStech employees went missing. Data is only available for the two weeks prior to the disappearance.
+
+To promote local businesses, Kronos based companies provide a Kronos Kares benefit card to GASTech employees giving them discounts and rewards in exchange for collecting information about their credit card purchases and preferences as recorded on loyalty cards. This data has been made available to investigators in the hopes that it can help resolve the situation. However, Kronos Kares does not collect personal information beyond purchases.
+
+As a visual analytics expert assisting law enforcement, your mission is to identify which GASTech employees made which purchases and identify suspicious patterns of behavior. You must cope with uncertainties that result from missing, conflicting, and imperfect data to make recommendations for further investigation.
+
+Use visual analytics to analyze the available data and develop responses to the questions below. In addition, prepare a video that shows how you used visual analytics to solve this challenge. Submission instructions are available here. Entry forms are available for download below.
+
+
+Note:
+
+* Dataset and the whole story background provided by the organizer. This scenario and all the people, places, groups, technologies, contained therein are fictitious. 
+* _Source: [Mini-Challenge 2](https://vast-challenge.github.io/2021/MC2.html)_,
+
+
+## Set R Studio environment and installed needed packages
+
 
 ```{r} 
 packages = c('igraph', 'tidygraph', 'ggraph', 'visNetwork', 'lubridate', 'clock', 'tidyverse','dplyr', 'tidyr','raster','sf','sp','tmap', 'gifski','mapview','writexl')
@@ -27,6 +60,7 @@ for (p in packages){
   library(p,character.only = T)
 }
 ```
+## Input and read dataset
 
 ```{r}
 credit_card <- read.csv("data/cc_data.csv")
@@ -37,6 +71,11 @@ glimpse(credit_card)
 loyalty_card <- read.csv("data/loyalty_data.csv")
 glimpse(loyalty_card)
 ```
+## Data preparation process
+
+### Change data type
+
+Cause data type of credit card is character which is not correct, so we need to change to date time data type.
 
 ```{r}
 credit_card$timestamp <- date_time_parse(credit_card$timestamp,
@@ -44,6 +83,7 @@ credit_card$timestamp <- date_time_parse(credit_card$timestamp,
                 format = "%m/%d/%Y %H:%M")
 glimpse(credit_card)
 ```
+### Change loyalty card for the same data type problem.
 
 ```{r}
 loyalty_card$timestamp <- date_time_parse(loyalty_card$timestamp,
@@ -51,7 +91,7 @@ loyalty_card$timestamp <- date_time_parse(loyalty_card$timestamp,
                 format = "%m/%d/%Y")
 glimpse(loyalty_card)
 ```
-
+### Change date data to the same form for credit card and loyalty card and join them together
 
 ```{r}
 credit_card$Date <- format(credit_card$timestamp, format = "%Y-%m-%d")
@@ -64,6 +104,10 @@ card_joined <- credit_card %>%
   full_join(loyalty_card, by = c("Date" = "timestamp", "location", "price"))
 
 ```
+
+## 1. Obseravation of credit card and loyalty card use, and identification of the most popular locations.
+
+### Count transaction time of credit card & loyalty card and sort by descding order for each
 
 ```{r}
 popular_credit_card <- credit_card %>%
@@ -80,6 +124,8 @@ popular_loyalty_card <- loyalty_card %>%
   
 ```
 
+### Get popular locations from the rank
+
 ```{r}
 popular_locations <- card_joined %>%
   filter(location %in% c("Katerina's Cafe", "Hippokampos", "Guy's Gyros", "Brew've Been Served", "Ouzeri Elian", "Hallowed Grounds")) %>%
@@ -88,14 +134,65 @@ popular_locations <- card_joined %>%
 ```
 
 ```{r}
+popular_top_credit <- popular_credit_card %>%
+ 
+ gather(location, count) %>%
+ arrange(desc(count)) %>%
+ top_n(6)
+
+popular_top_credit
+
+```
+```{r}
+top6_credit<-ggplot(data=popular_top_credit, aes(x=location, y=count)) +
+  geom_bar(stat="identity", fill="steelblue")+
+  theme_minimal()
+top6_credit
+
+```
+```{r}
+popular_top_loyal <- popular_loyalty_card %>%
+ 
+ gather(location, count) %>%
+ arrange(desc(count)) %>%
+ top_n(6)
+
+popular_top_loyal
+
+```
+```{r}
+top6_loyal<-ggplot(data=popular_top_loyal, aes(x=location, y=count)) +
+  geom_bar(stat="identity", fill="pink")+
+  theme_minimal()
+top6_loyal
+
+```
+```{r}
 abnormal_credit_card <- popular_locations %>%
   drop_na(loyaltynum) %>%
   group_by(last4ccnum) %>%
   summarize(loy_n = n_distinct(loyaltynum)) %>%
   filter(loy_n > 1)
 
+abnormal_credit_card
 ```
-    
+
+### Observation
+
+The most popular locations are as below:
+
+1. Katerina's Cafe
+2. Hippokampos		
+3. Guy's Gyros
+4. Brew've Been Served	
+5. Ouzeri Elian			
+6. Hallowed Grounds
+
+What's more i found something abnormal. Reasonably one credit card transaction should relate to only one loyalty card record for the same amount value, which means who consumed the money and would get the same value of point collection for loyalty card. We can filter out those credit card which have more than one loyalty card record. We can see that those last4ccnum has anomalies being observed, which are 1286, 4795, 4948, 5368, 5921, 7889, and 8332. I will pay more attention to these card when mapping later.
+
+
+## 2. Combine the vehicle data to the analysis of the credit and loyalty card Obseravation
+
 ```{r echo=TRUE, eval=TRUE}
 packages = c('raster', 'sf', 
              'tmap', 'clock', 
@@ -108,11 +205,15 @@ for (p in packages){
 }
 ```
 
+
+### Importing Raster file
+
 ```{r}
 bgmap <- raster("data/MC2-tourist.tif")
 bgmap
 ```
 
+### Plotting Raster Layer
 
 ```{r fig.height=5}
 tmap_mode("plot")
@@ -130,14 +231,22 @@ tm_shape(bgmap) +
            max.value = 255)
 ```
 
+### Importing Vector GIS Data File
+
 ```{r}
 Abila_st <- st_read(dsn = "data/Geospatial",
                     layer = "Abila")
 ```
+
+### Calculate new column for time interval to get the last timing point when driver used vehicle again, and named it as "gps2.csv" file
+
 ```{r}
 gps2 <- read_csv("data/gps2.csv")
 glimpse(gps2)
 ```
+
+### Converting Date-Time field
+
 
 ```{r}
 gps2$Timestamp <- date_time_parse(gps2$Timestamp,
@@ -145,9 +254,15 @@ gps2$Timestamp <- date_time_parse(gps2$Timestamp,
                 format = "%m/%d/%Y %H:%M")
 ```
 
+
+
+change data type of "id" to the "id" form to correctly show
+
 ```{r}
 gps2$id <- as_factor(gps2$id)
 ```
+
+Converting Aspatial Data into a Simple Feature Data Frame
 
 ```{r}
 gps_sf <- st_as_sf(gps2, 
@@ -155,6 +270,7 @@ gps_sf <- st_as_sf(gps2,
                    crs= 4326)
 ```
 
+Add more columns to get features that help to analyze
 
 ```{r}
 gps_sf$day <- format(gps_sf$Timestamp, format="%d")
@@ -163,11 +279,14 @@ gps_sf$minute <- format(gps_sf$Timestamp, format="%M")
 
 ```
 
+Manually filter those gps record which had more than 5 minutes time interval
+
 ```{r}
 more_than_5mins <- gps_sf %>%
   filter(Seconds > 300)
 ```
 
+Plotting the gps Paths
 
 ```{r}
 gps_path <- gps_sf %>%
@@ -176,6 +295,8 @@ gps_path <- gps_sf %>%
             do_union=FALSE) %>%
   st_cast("LINESTRING")
 ```
+
+Figure out gps path which only got one record and only select gps records which are more than 1, cause we should get path which having one more gps record.
 
 ```{r}
 p = npts(gps_path, by_feature = TRUE)
@@ -187,9 +308,11 @@ gps_path2 <- gps_path2 %>%
   filter(p>1)
 ```
 
+### Creating animated map with tmap_animation() function
+
 ```{r echo=FALSE, eval=TRUE, fig.height=6}
 gps_path_selected <- gps_path2 %>%
-  filter(hour == "20", day == "07", id == 29)
+  filter(day == "07",id %in% c(1,12))
 tmap_mode("view")
 tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1,g = 2,b = 3,
@@ -198,8 +321,10 @@ tm_shape(bgmap) +
        interpolate = TRUE,
        max.value = 255) +
   tm_shape(gps_path_selected) +
-  tm_lines()
+  tm_lines(col = 'id', style = "fixed")
 ```
+
+### Draw the plot graph using dot plot
 
 ```{r}
 gps_dot <- more_than_5mins %>%
@@ -212,6 +337,9 @@ card_selected <- card_joined %>%
   filter(last4ccnum == 9735)
 ```
 
+### I filter day, hour and minute for specific time spot and try to match with credit card purchasing record. get the matched credit card number, loyalty number and car ID
+
+Take the graph below as an example, after getting the gps dot plot then I get the gps record on the graph. then check with credit card ID purchasing record.The purchasing record a bit earlier than the gps record which can guess this person drive away after paying by credit card.
 
 ```{r echo=FALSE, eval=TRUE, fig.height=6}
 gps_dots_selected <- gps_dot %>%
@@ -226,6 +354,9 @@ tm_shape(bgmap) +
   tm_shape(gps_dots_selected) +
   tm_dots()
 ```
+
+
+## 3. Infer the owners of each credit card and loyalty card
 
 ```{r}
 car <- read_csv("data/car-assignments.csv")
@@ -257,3 +388,70 @@ car_gps <- st_as_sf(car_gps,
 car_gps <- car_gps %>%
   unite("Name", FirstName, LastName, sep = " ")
 ```
+
+
+```{r}
+abnormal_cc_match <- read.csv("data/abnormal_cc.csv")
+
+abnormal_cc_match
+```
+```{r}
+total_match <- read.csv("data/total_match.csv")
+
+total_match
+```
+I combined with car assignment file and inferred the owners of each credit card and loyalty card, as shown above.
+
+
+## 4. Identify potential informal or unofficial relationships among GASTech personnel
+
+```{r echo=FALSE, eval=TRUE, fig.height=6}
+gps_path_selected <- gps_path2 %>%
+  filter(id %in% c(22,30,15))
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_path_selected) +
+  tm_lines(col = 'id', style = "fixed")
+```
+i can see from the path above, these three people have the common path very often so gathering a lot, what's more they often get coffee time in the morning and they are in the same security department, so i guess they have relative close relationship and get along quite well.
+
+
+```{r echo=FALSE, eval=TRUE, fig.height=6}
+gps_path_selected <- gps_path2 %>%
+  filter(id %in% c(33,7))
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_path_selected) +
+  tm_lines(col = 'id', style = "fixed")
+```
+
+these two people are really skeptical cause they went to hotel many times during working time.
+
+
+## 5. Identify suspicious activity and locations where the suspicious activity is occurring
+
+```{r echo=FALSE, eval=TRUE, fig.height=6}
+
+gps_abnormal <- gps_dot %>%
+  filter(hour %in% c(02,03,04))
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_dots_selected) +
+  tm_dots()
+```
+i filter out the gps path which got record at 2am, 3am, and 4am. then i found these car ID, 21, 24, 15 got record in this time period which is very skeptical, and the abnormal place are Abila Scrapyard and GAS Tech, i am not sure if they need work that late in the company and cannot figure out the reason why they still outside in the midnight.
