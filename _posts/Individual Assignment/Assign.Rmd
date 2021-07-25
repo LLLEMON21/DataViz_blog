@@ -18,186 +18,242 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+```{r} 
+packages = c('igraph', 'tidygraph', 'ggraph', 'visNetwork', 'lubridate', 'clock', 'tidyverse','dplyr', 'tidyr','raster','sf','sp','tmap', 'gifski','mapview','writexl')
+for (p in packages){
+  if(!require(p, character.only = T)){
+    install.packages(p)
+  }
+  library(p,character.only = T)
+}
+```
+
+```{r}
+credit_card <- read.csv("data/cc_data.csv")
+glimpse(credit_card)
+```
+
+```{r}
+loyalty_card <- read.csv("data/loyalty_data.csv")
+glimpse(loyalty_card)
+```
+
+```{r}
+credit_card$timestamp <- date_time_parse(credit_card$timestamp,
+                zone = "",
+                format = "%m/%d/%Y %H:%M")
+glimpse(credit_card)
+```
+
+```{r}
+loyalty_card$timestamp <- date_time_parse(loyalty_card$timestamp,
+                zone = "",
+                format = "%m/%d/%Y")
+glimpse(loyalty_card)
+```
+
+
+```{r}
+credit_card$Date <- format(credit_card$timestamp, format = "%Y-%m-%d")
+credit_card$Date <- date_time_parse(credit_card$Date, zone = "", format = "%Y-%m-%d")
+glimpse(credit_card)
+```
+
+```{r}
+card_joined <- credit_card %>%
+  full_join(loyalty_card, by = c("Date" = "timestamp", "location", "price"))
+
+```
+
+```{r}
+popular_credit_card <- credit_card %>%
+  group_by(location) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count))
+```
+
+```{r}
+popular_loyalty_card <- loyalty_card %>%
+  group_by(location) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count))
+  
+```
+
+```{r}
+popular_locations <- card_joined %>%
+  filter(location %in% c("Katerina's Cafe", "Hippokampos", "Guy's Gyros", "Brew've Been Served", "Ouzeri Elian", "Hallowed Grounds")) %>%
+  drop_na(timestamp) %>%
+  dplyr::select(-Date)
+```
+
+```{r}
+abnormal_credit_card <- popular_locations %>%
+  drop_na(loyaltynum) %>%
+  group_by(last4ccnum) %>%
+  summarize(loy_n = n_distinct(loyaltynum)) %>%
+  filter(loy_n > 1)
+
+```
     
-# 1)	The original visualisation
-![](image/1.jpg)
-*Figure 1: Chart of Merchandise Trade Performance With Major Trading Partners, 2020*
-
-# 2)	Critiques and suggestions for current visualisation
-## 2.1 Clarity
-![](image/table1.JPG)
-
-## 2.2 Aesthetics
-
-![](image/table2.JPG)
-
-# 3)	 Proposed Design
-
-## 3.1 Sketch
-![](image/ketchup_update.jpg)
-*Figure 2: Sketch of proposed design*
-
-## 3.2 Advantages of proposed design
-
-i)	Clear title – Chart titles tell the big picture story, and make it interactive to show the change over years.
-ii)	Add reference line for Top 20% countries, which 80% for both percentile of Imports and Exports
-iii)	Make interactive Date selecting pane for each country to show year to year change clearly.
-
-
-# 4) Data visualisation steps
-## 4.1 Data preparation
-**1. Remove unnecessary rows and columns for sheet T1**
-
-Delete  rows 1-5 and 127-140 which are explanation information about data, also remove rows for total merchandise imports and 6 continents cause the comparison is between countries; Also only keep columns which are targeted time period, from January 2011 to December 2020.
-
-![](image/2.jpg)
-*Figure 3: Remove unnecessary rows and columns*
-
-**2. Do the same steps for sheet T2**
-
-**3. Combine sheets T1 and T2** 
-
-Combine two sheets together, add one more column “Import/Export” to differentiate and rename the country names for concise purpose.
-![](image/3.jpg)
-*Figure 4: Combine two sheets*
-
-**4. Add one more column named “Trade Volume by Country”**
-
-Add up export and import value for each country.
-![](image/4.jpg){width=50%}
-*Figure 5: Add one more column*
-
-**5. Pivot data**
-Import file into Tableau, select all the years, right click and select “Pivot”
-![](image/5.jpg)
-*Figure 6: Pivot data column*
-
-**6. Rename headers and change data type for columns**
-
-Rename ‘Variables’ to ‘Country’ and change data type to geographic role - country. Rename ‘Pivot Field Names’ to ‘Date’ and change data type to date. 
-
-![](image/6.jpg)
-*Figure 7: Modify headers and data type*
-
-## 4.2 Data visualisation
-
-**1. Create bubble chart**
-
-1.1. Create calculated field for ‘Imports‘, same step for creating field ‘Exports’
-![](image/7.jpg){width=70%}
-
-*Figure 8: Create calculated field*
-
-1.2. Drag [Imports], [Exports] to Columns and Rows, respectively. and shows them by Country.
-
-![](image/8.jpg){width=70%}
-
-*Figure 9: Create Scatter Plot*
-
-1.3. Handle with NA values
-
-![](image/9.jpg){width=60%}
-
-*Figure 10: Modify NA values*
-
-1.4. Change both axis to percentile to make each data point clearer
-Right click [SUM(Imports)] > Quick Table Calculation > Percentile.
-Right click [SUM(Exports)] > Quick Table Calculation > Percentile.
-
-![](image/10.jpg){width=50%}
-
-*Figure 11: Change both axises to percentile format*
-
-1.5. For both imports and exports, compute using country
-
-1.6. Differentiae size for each country according to their total trade volume. Marks by circle and change size, opacity and border color to make it easier to see.Hide field labels ‘Country’ for columns
-
-![](image/11.jpg){width=50%}
-
-*Figure 12: Format circle size according to trade volume*
-
-1.7. Color the bubble
-Drag trade volume by country to color pane to make the bubbles which represent larger merchandise volume have darker color.
-
-![](image/12.jpg){width=50%}
-
-*Figure 13: Color coding for bubble*
-
-1.8. Add reference line and format for both axis, constant value for 80%
-
-![](image/13.jpg){width=50%}
-
-*Figure 14: Add reference line*
-
-![](image/14.jpg){width=50%}
-
-*Figure 15: Format reference line*
-
-1.9. Edit title for the graph
-
-![](image/16.jpg){width=50%}
-
-*Figure 16: Add graph title*
-
-1.10. Add year to filter and customize the format
-
-![](image/15.jpg){width=50%}
-
-*Figure 17: Add Year filter*
-
-1.11. Make data labels clearly
-The percentile value is not very intuitive, create two calculated fields: “Ranking by Exports” and “Ranking by Imports”
-
-![](image/17.jpg){width=50%}
-
-*Figure 18: Created calculated field*
-
-
-1.12. Remove the percentile in tooltip and add ranking information
-
-![](image/18.jpg){width=50%}
-
-*Figure 19: Modify Tooltip*
-
-**2. Create line chart**
-
-2.1. Make line charts for Exports and Imports respectively
-![](image/19.jpg){width=50%}
-
-
-*Figure 20: Create line chart*
-
-2.2. Synchronize axis
-
-2.2. Add chart title
-
-![](image/20.jpg){width=50%}
-
-*Figure 21: Add chart title*
-
-**3. Interactive Purpose**
-
-3.1. Create one more filter for top countries
-Create calculated volume named “Ranking by Trade Volume”
-
-![](image/21.jpg){width=50%}
-
-*Figure 22: Create calculated field*
-
-3.2. Insert the line chart into bubble chart 
-Modify the content and format of bubble chart by tooltip.
-
-![](image/tooptip.JPG){width=50%}
-
-*Figure 23: Modify the tooltip of bubble chart*
-
-# 5) Final visualisation
-## 5.1 Snapshot of dashboard
-![](image/final.JPG)
-*Figure 24: Dashboard Full visualisation available at [Tableau Public](https://public.tableau.com/app/profile/lemon5793/viz/MerchandiseTradePerformance/InteractiveBubblePlot)*
-
-## 5.2 Main observations
-1. In year 2020, China's total merchandise volume, i.e. Exports volume plus Imports volume ranked in the first place, however it does not mantain in the first place during the observing time period.
-2. Regarding to total merchandise volume, the top 5 countries are Hong Kong, Mainland China, Indonesia, Malaysia, Taiwan and United States. However, Hong Kong’s Exports volume not always beyond Top20% compared with other countries, we can see Hong Kong is strong in Imports but weak in Exports performance. 
-3. Five more countries include for the list of Top 10 countries. Japan, Thailand, India and Korea. Indian’s Imports performance is not always beyond the Top20% benchmark.
-4. Choose filter pane for year, we can see each country’s Exports and Imports volume changing in an interactive way, which doesn’t change dramatically during the observing time period, 2011 to 2020.
+```{r echo=TRUE, eval=TRUE}
+packages = c('raster', 'sf', 
+             'tmap', 'clock', 
+             'tidyverse')
+for (p in packages){
+  if(!require(p, character.only = T)){
+    install.packages(p)
+  }
+  library(p,character.only = T)
+}
+```
+
+```{r}
+bgmap <- raster("data/MC2-tourist.tif")
+bgmap
+```
+
+
+```{r fig.height=5}
+tmap_mode("plot")
+tm_shape(bgmap) +
+    tm_raster(bgmap,
+              legend.show = FALSE)
+```
+
+```{r}
+tm_shape(bgmap) +
+    tm_rgb(bgmap,r=1,g=2,b=3,
+           alpha = NA,
+           saturation = 1,
+           interpolate = TRUE,
+           max.value = 255)
+```
+
+```{r}
+Abila_st <- st_read(dsn = "data/Geospatial",
+                    layer = "Abila")
+```
+```{r}
+gps2 <- read_csv("data/gps2.csv")
+glimpse(gps2)
+```
+
+```{r}
+gps2$Timestamp <- date_time_parse(gps2$Timestamp,
+                zone = "",
+                format = "%m/%d/%Y %H:%M")
+```
+
+```{r}
+gps2$id <- as_factor(gps2$id)
+```
+
+```{r}
+gps_sf <- st_as_sf(gps2, 
+                   coords = c("long", "lat"), 
+                   crs= 4326)
+```
+
+
+```{r}
+gps_sf$day <- format(gps_sf$Timestamp, format="%d")
+gps_sf$hour <- format(gps_sf$Timestamp, format="%H")
+gps_sf$minute <- format(gps_sf$Timestamp, format="%M")
+
+```
+
+```{r}
+more_than_5mins <- gps_sf %>%
+  filter(Seconds > 300)
+```
+
+
+```{r}
+gps_path <- gps_sf %>%
+  group_by(id, hour, day, minute) %>%
+  summarize(m = mean(Timestamp), 
+            do_union=FALSE) %>%
+  st_cast("LINESTRING")
+```
+
+```{r}
+p = npts(gps_path, by_feature = TRUE)
+gps_path2 <- cbind(gps_path, p)
+```
+
+```{r}
+gps_path2 <- gps_path2 %>%
+  filter(p>1)
+```
+
+```{r echo=FALSE, eval=TRUE, fig.height=6}
+gps_path_selected <- gps_path2 %>%
+  filter(hour == "20", day == "07", id == 29)
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_path_selected) +
+  tm_lines()
+```
+
+```{r}
+gps_dot <- more_than_5mins %>%
+  group_by(id, hour, day, minute) %>%
+  summarize(geo_n = n_distinct(geometry)) %>%
+  st_cast("POINT")
+```
+```{r}
+card_selected <- card_joined %>%
+  filter(last4ccnum == 9735)
+```
+
+
+```{r echo=FALSE, eval=TRUE, fig.height=6}
+gps_dots_selected <- gps_dot %>%
+  filter(day=='14', hour=='13', minute > '02')
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(gps_dots_selected) +
+  tm_dots()
+```
+
+```{r}
+car <- read_csv("data/car-assignments.csv")
+glimpse(car)
+
+```
+```{r}
+car <- car %>%
+  drop_na(CarID)
+
+car$CarID <- as_factor(car$CarID)
+
+glimpse(car)
+glimpse(gps2)
+
+```
+
+```{r}
+car_gps <- car %>%
+  full_join(gps2, by = c("CarID" = "id"))
+
+```
+
+```{r}
+car_gps <- st_as_sf(car_gps, 
+                   coords = c("long", "lat"),
+                       crs= 4326)
+
+car_gps <- car_gps %>%
+  unite("Name", FirstName, LastName, sep = " ")
+```
